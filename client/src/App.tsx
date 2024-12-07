@@ -4,13 +4,15 @@ import {
   CssBaseline,
   ThemeProvider,
 } from "@mui/material";
+import { RouterProvider } from "react-router";
+import router from "./components/Routes";
 const theme = createTheme({ palette: { mode: "dark" } });
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container>
-        <h1>Dark Mode</h1>
+        <RouterProvider router={router} />
       </Container>
     </ThemeProvider>
   );
