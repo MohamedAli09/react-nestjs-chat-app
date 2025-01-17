@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { DatabaseModule } from 'common/database/database.module';
+import { DatabaseModule } from 'src/common/database/database.module';
 import { UsersModule } from './users/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';

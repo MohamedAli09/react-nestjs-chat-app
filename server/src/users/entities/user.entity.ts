@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { AbstractEntity } from 'common/database/abstract.entity';
+import { AbstractEntity } from 'src/common/database/abstract.entity';
 import { Field, ObjectType } from '@nestjs/graphql';
 @Schema({ versionKey: false }) // versionKey: false is used to remove the __v field from the document
 @ObjectType() // ObjectType is used to create a class that can be used in graphql
