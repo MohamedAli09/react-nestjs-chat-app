@@ -6,15 +6,19 @@ import {
 } from "@mui/material";
 import { RouterProvider } from "react-router";
 import router from "./components/Routes";
+import { ApolloProvider } from "@apollo/client";
+import client from "./constants/apollo-client";
 const theme = createTheme({ palette: { mode: "dark" } });
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Container>
-        <RouterProvider router={router} />
-      </Container>
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container>
+          <RouterProvider router={router} />
+        </Container>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }
 
