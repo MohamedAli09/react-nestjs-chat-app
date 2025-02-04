@@ -9,6 +9,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.useLogger(app.get(Logger)); // Use the Logger instance from the LoggerModule to log requests and responses
   const configService = app.get(ConfigService); // Get the ConfigService instance
+  app.enableCors({
+    origin: 'http://localhost:3002', // Your client port
+    credentials: true,
+  });
   await app.listen(configService.get('PORT') || 3000);
 }
 bootstrap();
