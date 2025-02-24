@@ -5,10 +5,14 @@ import { useLogin } from "../../hooks/useLogin";
 import Auth from "./Auth";
 
 const Login = () => {
-  const { login } = useLogin();
+  const { login, error } = useLogin();
   return (
-    <Auth submitlabel="Login" onSubmit={(request) => login(request)}>
-      <Link to={"/signup"} style={{ alignSelf: "center" }}>
+    <Auth
+      submitlabel="Login"
+      onSubmit={(request) => login(request)}
+      error={error ? "Invalid email or password" : ""}
+    >
+      <Link to={"/ signup"} style={{ alignSelf: "center" }}>
         <MuiLink>Signup</MuiLink>
       </Link>
     </Auth>
