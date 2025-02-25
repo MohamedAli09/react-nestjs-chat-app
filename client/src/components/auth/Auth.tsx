@@ -11,6 +11,7 @@ interface AuthProps {
 const Auth = ({ submitlabel, onSubmit, children, error }: AuthProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   return (
     <Stack
       spacing={3}

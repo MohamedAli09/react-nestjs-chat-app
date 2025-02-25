@@ -10,9 +10,9 @@ const Login = () => {
     <Auth
       submitlabel="Login"
       onSubmit={(request) => login(request)}
-      error={error ? "Invalid email or password" : ""}
+      error={error}
     >
-      <Link to={"/ signup"} style={{ alignSelf: "center" }}>
+      <Link to={"/signup"} style={{ alignSelf: "center" }}>
         <MuiLink>Signup</MuiLink>
       </Link>
     </Auth>
