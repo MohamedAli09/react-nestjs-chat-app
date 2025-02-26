@@ -4,6 +4,7 @@ import { API_URL } from "./urls";
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   uri: `${API_URL}/graphql`,
+  credentials: "include",
 });
 
 export default client;
