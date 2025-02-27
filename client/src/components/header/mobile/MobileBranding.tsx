@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
-import router from "../Routes";
+import router from "../../Routes";
 
 const MobileBranding = () => {
   return (
