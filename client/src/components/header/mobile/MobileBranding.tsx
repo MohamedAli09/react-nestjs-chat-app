@@ -1,8 +1,12 @@
 import { Typography } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 import router from "../../Routes";
+import { useReactiveVar } from "@apollo/client";
+import { authenticatedVar } from "../../../constants/authenticated";
 
 const MobileBranding = () => {
+  const authenticated = useReactiveVar(authenticatedVar);
+
   return (
     <>
       <ChatIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -10,7 +14,13 @@ const MobileBranding = () => {
         variant="h5"
         noWrap
         component="a"
-        onClick={() => router.navigate("/")}
+        onClick={() => {
+          if (authenticated) {
+            router.navigate("/");
+          } else {
+            router.navigate("/login");
+          }
+        }}
         sx={{
           mr: 2,
           display: { xs: "flex", md: "none" },
