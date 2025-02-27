@@ -8,6 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import * as React from "react";
+import useLogout from "../../hooks/useLogout";
+import { onLogout } from "../../utils/logout";
 
 const Settings = ({
   anchorElUser,
@@ -20,6 +22,7 @@ const Settings = ({
   handleCloseUserMenu: () => void;
   settings: string[];
 }) => {
+  const { logout } = useLogout();
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
@@ -43,11 +46,17 @@ const Settings = ({
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
-          </MenuItem>
-        ))}
+        <MenuItem
+          key="logout"
+          onClick={async () => {
+            console.log("logout");
+            await logout();
+            onLogout();
+            handleCloseUserMenu();
+          }}
+        >
+          <Typography sx={{ textAlign: "center" }}>Logout</Typography>
+        </MenuItem>
       </Menu>
     </Box>
   );
