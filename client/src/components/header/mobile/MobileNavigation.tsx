@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { page } from "../../../interfaces/page.interface";
+import router from "../../Routes";
 
 const MobileNavigation = ({
   anchorElNav,
@@ -15,7 +17,7 @@ const MobileNavigation = ({
   anchorElNav: HTMLElement | null;
   handleOpenNavMenu: (event: React.MouseEvent<HTMLElement>) => void;
   handleCloseNavMenu: () => void;
-  pages: string[];
+  pages: page[];
 }) => {
   return (
     <>
@@ -47,8 +49,14 @@ const MobileNavigation = ({
           sx={{ display: { xs: "block", md: "none" } }}
         >
           {pages.map((page) => (
-            <MenuItem key={page} onClick={handleCloseNavMenu}>
-              <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+            <MenuItem
+              key={page.title}
+              onClick={() => {
+                router.navigate(page.path);
+                handleCloseNavMenu();
+              }}
+            >
+              <Typography sx={{ textAlign: "center" }}>{page.title}</Typography>
             </MenuItem>
           ))}
         </Menu>

@@ -10,11 +10,30 @@ import MobileNavigation from "./mobile/MobileNavigation";
 import MobileBranding from "./mobile/MobileBranding";
 import Navigation from "./Navigation";
 import Settings from "./Settings";
+import { useReactiveVar } from "@apollo/client";
+import { authenticatedVar } from "../../constants/authenticated";
+import { page } from "../../interfaces/page.interface";
 
-const pages: string[] = ["Home", "About", "Contact"];
+const pages: page[] = [
+  {
+    title: "Home",
+    path: "/",
+  },
+];
+const unauthenticatedPages: page[] = [
+  {
+    title: "Login",
+    path: "/login",
+  },
+  {
+    title: "Signup",
+    path: "/signup",
+  },
+];
 const settings: string[] = ["Logout"];
 
 const Header = () => {
+  const authenticated = useReactiveVar(authenticatedVar);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -46,16 +65,18 @@ const Header = () => {
             anchorElNav={anchorElNav}
             handleOpenNavMenu={handleOpenNavMenu}
             handleCloseNavMenu={handleCloseNavMenu}
-            pages={pages}
+            pages={authenticated ? pages : unauthenticatedPages}
           />
           <MobileBranding />
-          <Navigation pages={pages} />
-          <Settings
-            anchorElUser={anchorElUser}
-            handleOpenUserMenu={handleOpenUserMenu}
-            handleCloseUserMenu={handleCloseUserMenu}
-            settings={settings}
-          />
+          <Navigation pages={authenticated ? pages : unauthenticatedPages} />
+          {authenticated && (
+            <Settings
+              anchorElUser={anchorElUser}
+              handleOpenUserMenu={handleOpenUserMenu}
+              handleCloseUserMenu={handleCloseUserMenu}
+              settings={settings}
+            />
+          )}
         </Toolbar>
       </Container>
     </AppBar>
