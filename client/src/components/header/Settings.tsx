@@ -10,6 +10,8 @@ import {
 import * as React from "react";
 import useLogout from "../../hooks/useLogout";
 import { onLogout } from "../../utils/logout";
+import { snackVar } from "../../constants/snack";
+import { UNKNOWN_ERROR_SNACK_MESSAGE } from "../../constants/erros";
 
 const Settings = ({
   anchorElUser,
@@ -45,14 +47,19 @@ const Settings = ({
         }}
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
-      >
+      > 
         <MenuItem
           key="logout"
           onClick={async () => {
-            console.log("logout");
-            await logout();
-            onLogout();
-            handleCloseUserMenu();
+            try {
+              await logout();
+
+              onLogout();
+
+              handleCloseUserMenu();
+            } catch (err) {
+              snackVar(UNKNOWN_ERROR_SNACK_MESSAGE);
+            }
           }}
         >
           <Typography sx={{ textAlign: "center" }}>Logout</Typography>

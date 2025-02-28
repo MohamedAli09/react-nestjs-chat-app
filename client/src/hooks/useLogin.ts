@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { API_URL } from "../constants/urls";
 import client from "../constants/apollo-client";
+import { UNKNOWN_ERROR_MESSAGE } from "../constants/erros";
 
 interface LoginRequest {
   email: string;
@@ -24,7 +25,7 @@ const useLogin = () => {
         if (res.status === 401) {
           setError("Invalid credentials");
         } else {
-          setError("Something went wrong");
+          setError(UNKNOWN_ERROR_MESSAGE);
         }
         return;
       }
@@ -32,7 +33,7 @@ const useLogin = () => {
       await client.refetchQueries({ include: "active" });
     } catch (err) {
       // Network error (e.g., server down) will be caught here
-      setError("Something went wrong");
+      setError(UNKNOWN_ERROR_MESSAGE);
     }
   };
 
