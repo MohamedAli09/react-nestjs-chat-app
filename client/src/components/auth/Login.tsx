@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Link as MuiLink } from "@mui/material";
 import { useLogin } from "../../hooks/useLogin";
-
 import Auth from "./Auth";
 
 const Login = () => {
@@ -12,9 +11,9 @@ const Login = () => {
       onSubmit={(request) => login(request)}
       error={error}
     >
-      <Link to={"/signup"} style={{ alignSelf: "center" }}>
-        <MuiLink>Signup</MuiLink>
-      </Link>
+      <MuiLink component={Link} to="/signup" sx={{ alignSelf: "center" }}>
+        Signup
+      </MuiLink>
     </Auth>
   );
 };
