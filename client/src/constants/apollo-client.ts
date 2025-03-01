@@ -2,10 +2,12 @@ import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { API_URL } from "./urls";
 import excludedRoutes from "./excluded-routes";
-
 import { onLogout } from "../utils/logout";
+import { snackVar } from "./snack";
+import { UNKNOWN_ERROR_SNACK_MESSAGE } from "./erros";
 
-const logoutLink = onError((error) => {
+const errorLink = onError((error) => {
+  // Handle authentication errors
   if (
     error.graphQLErrors?.length &&
     (
@@ -18,7 +20,13 @@ const logoutLink = onError((error) => {
       onLogout();
     }
   }
+
+  // Handle network errors
+  if (error.networkError) {
+    snackVar(UNKNOWN_ERROR_SNACK_MESSAGE);
+  }
 });
+
 const httplink = new HttpLink({
   uri: `${API_URL}/graphql`,
   credentials: "include",
@@ -27,7 +35,7 @@ const httplink = new HttpLink({
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   uri: `${API_URL}/graphql`,
-  link: logoutLink.concat(httplink),
+  link: errorLink.concat(httplink),
   credentials: "include",
 });
 
