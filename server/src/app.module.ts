@@ -9,6 +9,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerModule } from 'nestjs-pino';
 import { AuthModule } from './auth/auth.module';
+import { ChatsModule } from './chats/chats.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { AuthModule } from './auth/auth.module';
       inject: [ConfigService],
     }),
     AuthModule,
+    ChatsModule,
   ],
   controllers: [AppController],
   providers: [AppService], // Add the resolver to the providers array
