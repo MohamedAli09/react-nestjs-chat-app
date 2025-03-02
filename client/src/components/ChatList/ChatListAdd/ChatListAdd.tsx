@@ -73,12 +73,12 @@ const ChatListAdd = ({ open, handleClose }: ChatListAddProps) => {
           )}
           <Button
             variant="outlined"
-            onClick={() => {
-              createChat({
+            onClick={async () => {
+              await createChat({
                 variables: {
                   createChatInput: {
                     isPrivate,
-                    name: name || undefined,
+                    name,
                   },
                 },
               });
