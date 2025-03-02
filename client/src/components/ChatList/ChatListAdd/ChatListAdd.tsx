@@ -82,6 +82,7 @@ const ChatListAdd = ({ open, handleClose }: ChatListAddProps) => {
                   },
                 },
               });
+              handleClose();
             }}
           >
             Save
