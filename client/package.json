@@ -28,10 +28,11 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "set PORT=3002 && react-scripts start",
+    "start": " set PORT=3002 && concurrently \"yarn codegen --watch\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +54,10 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@types/react-transition-group": "^4.4.11"
+    "@graphql-codegen/cli": "5.0.5",
+    "@graphql-codegen/client-preset": "4.6.4",
+    "@parcel/watcher": "^2.5.1",
+    "@types/react-transition-group": "^4.4.11",
+    "concurrently": "^9.1.2"
   }
 }

@@ -1,15 +1,16 @@
-import { gql, useQuery } from "@apollo/client";
-import { User } from "../models/User";
-const GET_ME = gql`
+import { useQuery } from "@apollo/client";
+
+import { graphql } from "../gql";
+const getMeDocument = graphql(`
   query GetMe {
     me {
       _id
       email
     }
   }
-`;
+`);
 const useGetMe = () => {
-  return useQuery<{ me: User }>(GET_ME, {
+  return useQuery(getMeDocument, {
     errorPolicy: "ignore", // overlay error ignored
   });
 };
